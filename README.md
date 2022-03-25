@@ -59,3 +59,9 @@ module "newrelic_log_ingestion" {
 ```
 
 By default, this will build and pack the lambda zip inside of the Terraform Module. You can supply your own by switching `build_lambda = false`, and specify the path to your lambda, using `lambda_archive = "{{LAMBDA_PATH}}"`, replacing `{{LAMBDA_PATH}}` with the path to your lambda.
+
+### Forked and added features. (2022-03, Kim)
+
+* Allow getting license key from the AWS Secrets Manager using `LICENSE_KEY_SECRET` environment variable.
+* Input `LICENSE_KEY_SECRET` with the Secret name of the Secrets Manager what contain your NewRelic license key. If this is specified, the Function Role must contain the `secretmanager:GetSecretValue` permission for that Secret.
+* If both `LICENSE_KEY` and `LICENSE_KEY_SECRET` are assigned, `LICENSE_KEY_SECRET` takes precedence over `LICENSE_KEY`.

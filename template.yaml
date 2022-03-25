@@ -6,6 +6,10 @@ Parameters:
     Type: String
     Description: Your NewRelic license key.
     NoEcho: true
+  NRLicenseKeySecret:
+    Type: String
+    Description: Secret name of the Secrets Manager what contain your NewRelic license key.
+    NoEcho: true
   NRLoggingEnabled:
     Type: String
     Description: Determines if logs are forwarded to New Relic Logging
@@ -85,6 +89,7 @@ Resources:
       Environment:
         Variables:
           LICENSE_KEY: !Ref NRLicenseKey
+          LICENSE_KEY_SECRET: !Ref NRLicenseKeySecret
           LOGGING_ENABLED: !Ref NRLoggingEnabled
           INFRA_ENABLED: !Ref NRInfraLogging
           DEBUG_LOGGING_ENABLED: !Ref DebugLoggingEnabled
@@ -106,6 +111,7 @@ Resources:
       Environment:
         Variables:
           LICENSE_KEY: !Ref NRLicenseKey
+          LICENSE_KEY_SECRET: !Ref NRLicenseKeySecret
           LOGGING_ENABLED: !Ref NRLoggingEnabled
           INFRA_ENABLED: !Ref NRInfraLogging
           DEBUG_LOGGING_ENABLED: !Ref DebugLoggingEnabled
