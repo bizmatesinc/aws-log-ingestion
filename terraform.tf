@@ -14,6 +14,12 @@ variable "nr_license_key" {
   sensitive   = true
 }
 
+variable "nr_license_key_secret" {
+  type        = string
+  description = "Secret name of the Secrets Manager what contain your NewRelic license key."
+  sensitive   = true
+}
+
 variable "nr_logging_enabled" {
   type        = bool
   description = "Determines if logs are forwarded to New Relic Logging"
@@ -185,6 +191,7 @@ resource "aws_lambda_function" "ingestion_function" {
   environment {
     variables = {
       LICENSE_KEY     = var.nr_license_key
+      LICENSE_KEY_SECRET = var.nr_license_key_secret
       LOGGING_ENABLED = var.nr_logging_enabled ? "True" : "False"
       INFRA_ENABLED   = var.nr_infra_logging ? "True" : "False"
     }

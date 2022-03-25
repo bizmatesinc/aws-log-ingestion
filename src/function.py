@@ -49,6 +49,9 @@ from urllib import request
 import aiohttp
 import asyncio
 
+import boto3
+from botocore.exceptions import ClientError
+
 logger = logging.getLogger()
 
 try:
@@ -312,6 +315,16 @@ def _get_license_key(license_key=None):
     """
     if license_key:
         return license_key
+    if (os.getenv("LICENSE_KEY_SECRET", "")):
+        botosession = boto3.session.Session()
+        botoclient = botosession.client(service_name='secretsmanager', region_name=os.getenv("AWS_REGION", "ap-northeast-1"))
+        try:
+            secret_value_response = botoclient.get_secret_value(SecretId=os.getenv("LICENSE_KEY_SECRET"))
+        except ClientError as e:
+            raise e
+        else:
+            if ('SecretString' in secret_value_response):
+                return secret_value_response['SecretString']
     return os.getenv("LICENSE_KEY", "")
 
 
