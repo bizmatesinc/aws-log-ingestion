@@ -81,7 +81,7 @@ Resources:
       FunctionName: newrelic-log-ingestion
       MemorySize:
         Ref: MemorySize
-      Runtime: python3.7
+      Runtime: python3.9
       PermissionsBoundary: !If [ HasPermissionBoundary, !Ref PermissionsBoundary, !Ref AWS::NoValue ]
       Role: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:role/${FunctionRole}
       Timeout:
@@ -104,7 +104,7 @@ Resources:
       FunctionName: newrelic-log-ingestion
       MemorySize:
         Ref: MemorySize
-      Runtime: python3.7
+      Runtime: python3.9
       PermissionsBoundary: !If [ HasPermissionBoundary, !Ref PermissionsBoundary, !Ref AWS::NoValue ]
       Timeout:
         Ref: Timeout
