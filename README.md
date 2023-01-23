@@ -103,3 +103,10 @@ The payload should include the following (properly escaped) elements[^1]:
 ```
 
 [^1]: Replace <your_xyz> elements with your content, for example: `"log_stream_name": "2022/05/17/[$LATEST]30dce751bc1a4e7497eb644171d70153"`.
+
+
+### Forked and added features. (2023-01, Kim)
+
+* Allow getting license key from the AWS Secrets Manager using `LICENSE_KEY_SECRET` environment variable.
+* Input `LICENSE_KEY_SECRET` with the Secret name of the Secrets Manager what contain your NewRelic license key. If this is specified, the Function Role must contain the `secretmanager:GetSecretValue` permission for that Secret.
+* If both `LICENSE_KEY` and `LICENSE_KEY_SECRET` are assigned, `LICENSE_KEY_SECRET` takes precedence over `LICENSE_KEY`.
